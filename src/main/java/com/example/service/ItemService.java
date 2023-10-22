@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Item;
 import com.example.repository.ItemRepository;
+import com.example.resource.RequestItem;
 
 @Service
 public class ItemService {
@@ -24,4 +25,12 @@ public class ItemService {
         return this.itemRepository.findAll();
     }
     
+    public Item insert(RequestItem requestItem) { //name price のあるDTOクラスを引数
+      Item item = new Item();
+      // RequestItemオブジェクトに保存された値を使ってデータをセットします
+      item.setName(requestItem.getName());
+      item.setPrice(requestItem.getPrice());
+
+      return this.itemRepository.save(item);
+  }
 }
